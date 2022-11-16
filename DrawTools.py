@@ -3,6 +3,12 @@ from SpriteSheet import *
 
 BLACK = (0, 0, 0)
 
+def idleStance(player):
+    player.up_idle_stance = player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 0, 0)
+    player.left_idle_stance = player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 1, 0)
+    player.down_idle_stance = player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 2, 0)
+    player.right_idle_stance = player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 3, 0)
+
 def bodyAnimations(player):
 
     player.up_animation_list = []
@@ -209,7 +215,6 @@ def weaponHitAnimations(player):
 
 def blitSprite(screen, sprite):
     if sprite.direction == "up":
-        sprite.update_pos()
         screen.blit(sprite.up_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.feet_up_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.legs_up_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
@@ -219,7 +224,6 @@ def blitSprite(screen, sprite):
         screen.blit(sprite.belt_up_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.head_up_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
     elif sprite.direction == "left":
-        sprite.update_pos()
         screen.blit(sprite.left_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.feet_left_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.legs_left_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
@@ -229,7 +233,6 @@ def blitSprite(screen, sprite):
         screen.blit(sprite.belt_left_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.head_left_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
     elif sprite.direction == "down":
-        sprite.update_pos()
         screen.blit(sprite.down_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.feet_down_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.legs_down_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
@@ -239,7 +242,6 @@ def blitSprite(screen, sprite):
         screen.blit(sprite.belt_down_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.head_down_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
     elif sprite.direction == "right":
-        sprite.update_pos()
         screen.blit(sprite.right_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.feet_right_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.legs_right_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
@@ -248,4 +250,12 @@ def blitSprite(screen, sprite):
             screen.blit(sprite.arms_right_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.belt_right_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
         screen.blit(sprite.head_right_animation_list[sprite.frame], (sprite.character_x_pos, sprite.character_y_pos))
+    elif sprite.direction == "sup":
+        screen.blit(sprite.up_idle_stance, (sprite.character_x_pos, sprite.character_y_pos))
+    elif sprite.direction == "sleft":
+        screen.blit(sprite.left_idle_stance, (sprite.character_x_pos, sprite.character_y_pos))
+    elif sprite.direction == "sdown":
+        screen.blit(sprite.down_idle_stance, (sprite.character_x_pos, sprite.character_y_pos))
+    elif sprite.direction == "sright":
+        screen.blit(sprite.right_idle_stance, (sprite.character_x_pos, sprite.character_y_pos))
 
