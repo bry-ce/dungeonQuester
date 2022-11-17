@@ -1,9 +1,11 @@
-import pygame, sys
-from  SpriteSheet import *
-from pygame.locals import *
-from Player import *
+import sys
+
+import pygame
 from Button import *
 from DrawTools import *
+from Player import *
+from pygame.locals import *
+from SpriteSheet import *
 from StartScreen import *
 
 pygame.init()
@@ -32,7 +34,7 @@ start = True
 
 while True:
     for event in pygame.event.get():
-        main_player.current_time = pygame.time.get_ticks()
+        
         pressed = pygame.key.get_pressed()
         mousepos = pygame.mouse.get_pos()
 
@@ -61,11 +63,11 @@ while True:
             elif event.key == K_d:
                  main_player.go("sright")
 
-        main_player.update()
+    main_player.update()
 
-        #draws player to screen based on direction, and handles animations
-        screen.fill(BG)
-        blitSprite(screen, main_player)
-        pygame.display.update()
-        clock.tick(30)
+    #draws player to screen based on direction, and handles animations
+    screen.fill(BG)
+    screen.blit(main_player.image, main_player.rect)
+    pygame.display.update() 
+    clock.tick(30)
   

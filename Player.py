@@ -2,14 +2,15 @@ from SpriteSheet import *
 from DrawTools import *
 import pygame
 
+print("import")
 BG = (50, 50, 50)
 BLACK =(0, 0, 0)
 
 
 
 class Player():
-
     def __init__(self, clothing, maxSpeed):
+        print("player")
         self.clothing = clothing
         
 
@@ -34,25 +35,31 @@ class Player():
         self.current_time = pygame.time.get_ticks()
         self.last_update = pygame.time.get_ticks()
         self.player_animation_cooldown = 75
-        self.frame = 0
+        
         
         self.direction = 'down'
 
         self.weapon_out = False
 
         self.images = self.down_animation_list
-        self.rect = self.images[self.frame].get_rect()
+        self.frame = 0
+        self.maxFrame = len(self.images)
+        self.image = self.images[self.frame]
+        self.rect = self.image.get_rect()
+        
 
 
     def update_frame(self):
-        if self.idling == False:
-            if self.current_time - self.last_update >= self.player_animation_cooldown:
-                self.frame += 1
-                self.last_update = self.current_time
-            if self.frame >= len(self.images):
+        print(self.current_time - self.last_update)
+        if self.current_time - self.last_update >= self.player_animation_cooldown:
+            self.frame += 1
+            print(self.frame, self.maxFrame)
+            self.last_update = self.current_time
+            if self.frame >= self.maxFrame:
                 self.frame = 0
-        else:
-            self.frame = 0
+            self.image = self.images[self.frame]
+        
+        
 
     def go(self, direction):
         self.direction = direction
@@ -89,7 +96,11 @@ class Player():
             self.images = self.right_idle_stance
             self.idling = True
         
+        print(self.images)
+
         self.frame = 0
+        self.maxFrame = len(self.images)
+        self.image = self.images[self.frame]
         
 
     def set_clothing(self, index):
@@ -118,11 +129,11 @@ class Player():
             self.character_body_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/BODY_male.png").convert_alpha())
 
     def move(self):
-        self.rect.move(self.speed[0], self.speed[1])
-        self.character_x_pos += self.speed[0]
-        self.character_y_pos += self.speed[1]
+        self.rect = self.rect.move(self.speed)
+        
     
 
     def update(self):
-        self.rect.move(self.speed[0], self.speed[1])
+        self.current_time = pygame.time.get_ticks()
+        self.move()
         self.update_frame()

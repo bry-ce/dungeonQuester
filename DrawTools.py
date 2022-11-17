@@ -4,10 +4,10 @@ from SpriteSheet import *
 BLACK = (0, 0, 0)
 
 def idleStance(player):
-    player.up_idle_stance = player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 0, 0)
-    player.left_idle_stance = player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 1, 0)
-    player.down_idle_stance = player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 2, 0)
-    player.right_idle_stance = player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 3, 0)
+    player.up_idle_stance = [player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 0, 0)]
+    player.left_idle_stance = [player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 1, 0)]
+    player.down_idle_stance = [player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 2, 0)]
+    player.right_idle_stance = [player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 3, 0)]
 
 def bodyAnimations(player):
 
