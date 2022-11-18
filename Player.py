@@ -13,31 +13,20 @@ class Player():
         print("player")
         self.clothing = clothing
         
-
         self.set_clothing(1)
         idleStance(self)
-        bodyAnimations(self)
-        headAnimations(self)
-        beltAnimations(self)
-        torsoAnimations(self)
-        legsAnimations(self)
-        feetAnimations(self)
-        if self.clothing == 1:
-            armsAnimations(self)
+        characterAnimations(self)
 
         self.speed = [0, 0]
         self.maxSpeed = maxSpeed 
-        self.character_x_pos = 436
-        self.character_y_pos = 336
+        self.character_pos = (436, 336)
 
         self.heading = ''
+        self.direction = 'sdown'
         self.idling = True
         self.current_time = pygame.time.get_ticks()
         self.last_update = pygame.time.get_ticks()
         self.player_animation_cooldown = 75
-        
-        
-        self.direction = 'down'
 
         self.weapon_out = False
 
@@ -45,21 +34,18 @@ class Player():
         self.frame = 0
         self.maxFrame = len(self.images)
         self.image = self.images[self.frame]
-        self.rect = self.image.get_rect()
-        
-
+        self.rect = self.image.get_rect(topleft = self.character_pos)
 
     def update_frame(self):
         print(self.current_time - self.last_update)
-        if self.current_time - self.last_update >= self.player_animation_cooldown:
-            self.frame += 1
-            print(self.frame, self.maxFrame)
-            self.last_update = self.current_time
-            if self.frame >= self.maxFrame:
-                self.frame = 0
-            self.image = self.images[self.frame]
-        
-        
+        if not (self.idling):
+            if self.current_time - self.last_update >= self.player_animation_cooldown:
+                self.frame += 1
+                print(self.frame, self.maxFrame)
+                self.last_update = self.current_time
+                if self.frame >= self.maxFrame:
+                    self.frame = 0
+                self.image = self.images[self.frame]
 
     def go(self, direction):
         self.direction = direction
@@ -102,7 +88,6 @@ class Player():
         self.maxFrame = len(self.images)
         self.image = self.images[self.frame]
         
-
     def set_clothing(self, index):
         self.clothing = index
         if self.clothing == 0:
@@ -113,13 +98,7 @@ class Player():
             self.character_feet_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/FEET_shoes_brown.png").convert_alpha())
             self.character_body_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/BODY_male.png").convert_alpha())
         elif self.clothing == 1:
-            self.character_head_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/HEAD_plate_armor_helmet.png").convert_alpha())
-            self.character_belt_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/BELT_leather.png").convert_alpha())
-            self.character_torso_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/TORSO_plate_armor_torso.png").convert_alpha())
-            self.character_arms_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/TORSO_plate_armor_arms_shoulders.png").convert_alpha())
-            self.character_legs_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/LEGS_plate_armor_pants.png").convert_alpha())
-            self.character_feet_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/FEET_plate_armor_shoes.png").convert_alpha())
-            self.character_body_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/BODY_male.png").convert_alpha())
+            self.character_body_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry\png\walkcycle\BODY_male_plate.png").convert_alpha())
         elif self.clothing == 2:
             self.character_head_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry\png\walkcycle\HEAD_robe_hood.png").convert_alpha())
             self.character_belt_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/BELT_rope.png").convert_alpha())
@@ -131,8 +110,6 @@ class Player():
     def move(self):
         self.rect = self.rect.move(self.speed)
         
-    
-
     def update(self):
         self.current_time = pygame.time.get_ticks()
         self.move()
