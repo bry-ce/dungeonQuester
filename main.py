@@ -9,7 +9,7 @@ from SpriteSheet import *
 from StartScreen import *
 
 pygame.init()
-screen = pygame.display.set_mode((1000,800))
+screen = pygame.display.set_mode((1080,720))
 clock = pygame.time.Clock()
 
 BG = (50, 50, 50)

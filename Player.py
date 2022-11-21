@@ -21,9 +21,9 @@ class Player():
         self.maxSpeed = maxSpeed 
         self.character_pos = (436, 336)
 
-        self.heading = ''
         self.direction = 'sdown'
         self.idling = True
+        self.moving = False
         self.current_time = pygame.time.get_ticks()
         self.last_update = pygame.time.get_ticks()
         self.player_animation_cooldown = 75
@@ -37,11 +37,9 @@ class Player():
         self.rect = self.image.get_rect(topleft = self.character_pos)
 
     def update_frame(self):
-        print(self.current_time - self.last_update)
         if not (self.idling):
             if self.current_time - self.last_update >= self.player_animation_cooldown:
                 self.frame += 1
-                print(self.frame, self.maxFrame)
                 self.last_update = self.current_time
                 if self.frame >= self.maxFrame:
                     self.frame = 0
@@ -49,6 +47,7 @@ class Player():
 
     def go(self, direction):
         self.direction = direction
+
         if direction == "up":
             self.speed[1] = -self.maxSpeed
             self.images = self.up_animation_list
@@ -82,8 +81,7 @@ class Player():
             self.images = self.right_idle_stance
             self.idling = True
         
-        print(self.images)
-
+        
         self.frame = 0
         self.maxFrame = len(self.images)
         self.image = self.images[self.frame]
