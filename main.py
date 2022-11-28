@@ -62,6 +62,9 @@ while True:
                  main_player.go("sdown")
             elif event.key == K_d:
                  main_player.go("sright")
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                main_player.attack()
 
     main_player.update()
 
