@@ -33,7 +33,7 @@ def characterAnimations(player):
     player.right_animation_frames = 9
 
     for i in range(player.right_animation_frames):
-        player.right_animation_list.append(player.character_attack_sprite_sheet.get_image(64, 64, 2, BLACK, 3, i))
+        player.right_animation_list.append(player.character_body_sprite_sheet.get_image(64, 64, 2, BLACK, 3, i))
 
 def attackAnimations(player):
     player.up_attack_list = []
@@ -59,3 +59,9 @@ def attackAnimations(player):
 
     for i in range(player.right_attack_frames):
         player.right_attack_list.append(player.character_attack_sprite_sheet.get_image(64, 64, 2, BLACK, 3, i))
+
+
+def fade_object(img):
+    for i in range(255):
+        img.set_alpha(255-i)
+        

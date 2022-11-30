@@ -32,6 +32,8 @@ class Player():
 
         self.weapon_out = False
         self.attacking = False
+        
+
 
         self.images = self.down_animation_list
         self.frame = 0
@@ -52,16 +54,19 @@ class Player():
                 self.image = self.images[self.frame]
 
     def attack_cycle(self):
+        self.minFrame = 3
+        self.maxFrame = 8
         if self.attacking:
             if self.current_time - self.last_update >= self.player_animation_cooldown:
                 self.frame += 1
                 self.last_update = self.current_time
                 if self.frame >= self.maxFrame:
-                    self.attacking = False
-                    self.minFrame = 2
+                    self.minFrame = 3
                     self.frame = self.minFrame
+                    self.attacking = False
                 self.image = self.images[self.frame]
-
+                
+    
     def go(self, direction):
         self.direction = direction
 
@@ -69,18 +74,22 @@ class Player():
             self.speed[1] = -self.maxSpeed
             self.images = self.up_animation_list
             self.idling = False
+            self.attacking = False
         elif direction == "down":
             self.speed[1] = self.maxSpeed
             self.images = self.down_animation_list
             self.idling = False
+            self.attacking = False
         elif direction == "left":
             self.speed[0] = -self.maxSpeed
             self.images = self.left_animation_list
             self.idling = False
+            self.attacking = False
         elif direction == "right":
             self.speed[0] = self.maxSpeed
             self.images = self.right_animation_list
             self.idling = False
+            self.attacking = False
         if direction == "sup":
             self.speed[1] = 0
             self.images = self.up_idle_stance

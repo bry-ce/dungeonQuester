@@ -1,12 +1,13 @@
 import sys
 
-import pygame
+import pygame, math, random
 from Button import *
 from DrawTools import *
 from Player import *
 from pygame.locals import *
 from SpriteSheet import *
 from StartScreen import *
+from Hitmarker import *
 
 pygame.init()
 screen = pygame.display.set_mode((1080,720))
@@ -16,12 +17,12 @@ BG = (50, 50, 50)
 BLACK =(0, 0, 0)
 character_speed_x= 8
 character_speed_y= 8
-
 current_time = pygame.time.get_ticks()
-
+hit = False
 direction = "up"
 
 main_player = Player(1, 4)
+
 #gui = Gui()
 #start_screen_picker = gui.gui_sprite_sheet.get_static_image(310, 80, 0, 110, 310, 190, 1, BLACK)
 
@@ -66,11 +67,14 @@ while True:
             if event.button == 1:
                 main_player.attack()
 
+                
+
     main_player.update()
 
     #draws player to screen based on direction, and handles animations
     screen.fill(BG)
     screen.blit(main_player.image, main_player.rect)
+
     pygame.display.update() 
     clock.tick(30)
   
