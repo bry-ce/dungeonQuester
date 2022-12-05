@@ -1,6 +1,7 @@
 from SpriteSheet import *
 from DrawTools import *
 import pygame
+from Door import *
 
 print("import")
 BG = (50, 50, 50)
@@ -65,11 +66,10 @@ class Player():
                     self.frame = self.minFrame
                     self.attacking = False
                 self.image = self.images[self.frame]
-                
+
     
     def go(self, direction):
         self.direction = direction
-
         if direction == "up":
             self.speed[1] = -self.maxSpeed
             self.images = self.up_animation_list
@@ -136,34 +136,39 @@ class Player():
         self.rect = self.rect.move(self.speed)
     
     def attack(self):
-        if self.direction == "up":
-            self.images = self.up_attack_list
-            self.attacking = True
-        elif self.direction == "right":
-            self.images = self.right_attack_list
-            self.attacking = True
-        elif self.direction == "down":
-            self.images = self.down_attack_list
-            self.attacking = True
-        elif self.direction == "left":
-            self.images = self.left_attack_list
-            self.attacking = True
-        elif self.direction == "sup":
-            self.images = self.up_attack_list
-            self.attacking = True
-        elif self.direction == "sright":
-            self.images = self.right_attack_list
-            self.attacking = True
-        elif self.direction == "sdown":
-            self.images = self.down_attack_list
-            self.attacking = True
-        elif self.direction == "sleft":
-            self.images = self.left_attack_list
-            self.attacking = True
-
+        if self.idling:
+            if self.direction == "up":
+                self.images = self.up_attack_list
+                self.attacking = True
+            elif self.direction == "right":
+                self.images = self.right_attack_list
+                self.attacking = True
+            elif self.direction == "down":
+                self.images = self.down_attack_list
+                self.attacking = True
+            elif self.direction == "left":
+                self.images = self.left_attack_list
+                self.attacking = True
+            elif self.direction == "sup":
+                self.images = self.up_attack_list
+                self.attacking = True
+            elif self.direction == "sright":
+                self.images = self.right_attack_list
+                self.attacking = True
+            elif self.direction == "sdown":
+                self.images = self.down_attack_list
+                self.attacking = True
+            elif self.direction == "sleft":
+                self.images = self.left_attack_list
+                self.attacking = True
+    
+    
+    
+    
 
     def update(self):
         self.current_time = pygame.time.get_ticks()
         self.move()
         self.update_frame()
         self.attack_cycle()
+        
