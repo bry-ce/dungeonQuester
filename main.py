@@ -2,6 +2,7 @@ import sys
 
 import pygame, math, random
 from Button import *
+from RoomLoader import *
 from DrawTools import *
 from Player import *
 from pygame.locals import *
@@ -11,7 +12,8 @@ from Hitmarker import *
 from Door import *
 
 pygame.init()
-screen = pygame.display.set_mode((1080,720))
+screen = pygame.display.set_mode((1152,720))
+                                #24 x 15 tiles
 clock = pygame.time.Clock()
 
 BG = (50, 50, 50)
@@ -24,7 +26,7 @@ direction = "up"
 door = Door(1)
 main_player = Player(1, 4)
 
-
+tavern = loadRoom("dungeonQuester\rooms\tavern.room.txt")
 
 #gui = Gui()
 #start_screen_picker = gui.gui_sprite_sheet.get_static_image(310, 80, 0, 110, 310, 190, 1, BLACK)
