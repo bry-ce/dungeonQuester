@@ -23,11 +23,11 @@ character_speed_y= 8
 current_time = pygame.time.get_ticks()
 hit = False
 direction = "up"
-door = Door(1)
+
 main_player = Player(1, 4)
 
-tavern = loadRoom("dungeonQuester\rooms\tavern.room.txt")
-
+current_room = loadRoom("dungeonQuester/rooms/tavern.room.txt")
+current_room_decor = loadRoom("dungeonQuester/rooms/tavernDecor.txt")
 #gui = Gui()
 #start_screen_picker = gui.gui_sprite_sheet.get_static_image(310, 80, 0, 110, 310, 190, 1, BLACK)
 
@@ -72,17 +72,20 @@ while True:
             if event.button == 1:
                 main_player.attack()
 
-    if main_player.rect.colliderect(door.rect):
-        main_player.rect.topleft = main_player.character_pos
+
 
 
     main_player.update()
 
     #draws player to screen based on direction, and handles animations
     screen.fill(BG)
-    screen.blit(door.img, (0,0))
-    screen.blit(main_player.image, main_player.rect)
+    for tile in current_room:
+        screen.blit(tile.img, tile.pos)
 
+    for decor in current_room_decor:
+        screen.blit(decor.img, decor.pos)
+ 
+    screen.blit(main_player.image, main_player.rect)
     pygame.display.update() 
     clock.tick(30)
   

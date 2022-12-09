@@ -21,7 +21,9 @@ def loadRoom(room):
 
     for y, line in enumerate(lines):
         for x, c in enumerate(line):
-            if c == "+":
+            if c == "_":
+                pass
+            elif c == "+":
                 tiles += [Tile("Floor", [x*size, y*size])]
             elif c == "-":
                 tiles += [Tile("T_Wall", [x*size, y*size])]
@@ -33,6 +35,10 @@ def loadRoom(room):
                 tiles += [Tile("L_Wall", [x*size, y*size])]
             elif c == ";":
                 tiles += [Tile("R_Wall", [x*size, y*size])]
+            elif c == "b":
+                tiles += [Tile("BS", [x*size, y*size])]
+            elif c == "a":
+                tiles += [Tile("AS", [x*size, (y*size)-5])]
             
     return tiles
     
