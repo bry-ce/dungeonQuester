@@ -25,7 +25,7 @@ hit = False
 direction = "up"
 
 main_player = Player(1, 4)
-
+door = Door(2, (100,300))
 current_room = loadRoom("dungeonQuester/rooms/tavern.room.txt")
 current_room_decor = loadRoom("dungeonQuester/rooms/tavernDecor.txt")
 #gui = Gui()
@@ -72,7 +72,8 @@ while True:
             if event.button == 1:
                 main_player.attack()
 
-
+    if pygame.Rect.colliderect(main_player.subrect, door.rect):
+        main_player.place((436, 336))
 
 
     main_player.update()
@@ -84,7 +85,7 @@ while True:
 
     for decor in current_room_decor:
         screen.blit(decor.img, decor.pos)
- 
+    screen.blit(door.img, door.rect)
     screen.blit(main_player.image, main_player.rect)
     pygame.display.update() 
     clock.tick(30)

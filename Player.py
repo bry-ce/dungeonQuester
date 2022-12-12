@@ -43,6 +43,12 @@ class Player():
         self.image = self.images[self.frame]
         self.rect = self.image.get_rect(topleft = self.character_pos)
 
+        #subrect is hitbox of image, topleft of hitbox being 17,13 from 
+        # paint.net image, hitbox of image is 30x48, hitbox is offsetby 8 
+        # pixels because of sprite placement in pdn.
+        self.subrect = pygame.Rect(17,13, 30,48)
+        self.subrect.center = [self.rect.centerx, self.rect.centery+8]
+
     def update_frame(self):
         self.minFrame = 1
         self.maxFrame = 9
@@ -133,8 +139,20 @@ class Player():
             self.character_body_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/BODY_male.png").convert_alpha())
 
     def move(self):
-        self.rect = self.rect.move(self.speed)
-    
+        if self.direction == 'up' and self.rect.top > 0:
+            self.rect = self.rect.move(self.speed)
+        elif self.direction == 'left' and self.rect.left > -24:
+            self.rect = self.rect.move(self.speed)
+        elif self.direction == 'right' and self.rect.right < 1152:
+            self.rect = self.rect.move(self.speed)
+        elif self.direction == 'down' and self.rect.bottom < 672:
+            self.rect = self.rect.move(self.speed)
+        else:
+            self.idling = True
+        
+        self.subrect = pygame.Rect(17,13, 30,48)
+        self.subrect.center = [self.rect.centerx, self.rect.centery+8]
+
     def attack(self):
         if self.idling:
             if self.direction == "up":
@@ -163,8 +181,13 @@ class Player():
                 self.attacking = True
     
     
+    def doorCollide(self, door):
+        if self.rect.colliderect(door.rect):
+            self.place((436, 336))
     
-    
+
+    def place(self, position = (436, 336)):
+        self.rect.topleft = position
 
     def update(self):
         self.current_time = pygame.time.get_ticks()
