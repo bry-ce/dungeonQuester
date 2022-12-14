@@ -10,10 +10,11 @@ from SpriteSheet import *
 from StartScreen import *
 from Hitmarker import *
 from Door import *
-
+from time import *
 pygame.init()
 screen = pygame.display.set_mode((1152,720))
                                 #24 x 15 tiles
+
 clock = pygame.time.Clock()
 
 BG = (50, 50, 50)
@@ -28,10 +29,14 @@ main_player = Player(1, 4)
 door = Door(2, (100,300))
 current_room = loadRoom("dungeonQuester/rooms/tavern.room.txt")
 current_room_decor = loadRoom("dungeonQuester/rooms/tavernDecor.txt")
+townSquareTransition = pygame.image.load("dungeonQuester/transitionScreens/townSquare.png")
+
 #gui = Gui()
 #start_screen_picker = gui.gui_sprite_sheet.get_static_image(310, 80, 0, 110, 310, 190, 1, BLACK)
 
-
+transitioning = False
+transition_time = 3000
+last_transition = pygame.time.get_ticks()
 last_update = pygame.time.get_ticks()
 player_animation_cooldown = 200
 frame = 0
@@ -73,20 +78,38 @@ while True:
                 main_player.attack()
 
     if pygame.Rect.colliderect(main_player.subrect, door.rect):
+        transitioning = True
         main_player.place((436, 336))
+        
 
 
     main_player.update()
 
     #draws player to screen based on direction, and handles animations
-    screen.fill(BG)
+    
+
+    
     for tile in current_room:
         screen.blit(tile.img, tile.pos)
 
     for decor in current_room_decor:
         screen.blit(decor.img, decor.pos)
+    
+    
     screen.blit(door.img, door.rect)
     screen.blit(main_player.image, main_player.rect)
+
+    
+    if transitioning == True:
+        if current_time - last_transition >= transition_time:
+            transitioning = False
+        else:
+            screen.blit(townSquareTransition, (0,0))
+            last_transition = current_time
+        
+
+        
+    
     pygame.display.update() 
     clock.tick(30)
   

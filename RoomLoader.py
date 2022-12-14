@@ -40,7 +40,7 @@ def loadRoom(room):
             elif c == "a":
                 tiles += [Tile("AS", [x*size, (y*size)+20])]
             elif c == "s":
-                tiles += [Door(2, [[x*size, y*size]])]
+                tiles += [Door(2, [x*size, y*size])]
             
     return tiles
     
