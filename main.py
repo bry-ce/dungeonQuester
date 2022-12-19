@@ -25,7 +25,7 @@ current_time = pygame.time.get_ticks()
 hit = False
 direction = "up"
 
-main_player = Player(1, 4)
+main_player = Player(1, 6)
 door = Door(2, (100,300))
 current_room = loadRoom("dungeonQuester/rooms/tavern.room.txt")
 current_room_decor = loadRoom("dungeonQuester/rooms/tavernDecor.txt")
@@ -98,18 +98,9 @@ while True:
     
     screen.blit(door.img, door.rect)
     screen.blit(main_player.image, main_player.rect)
-
-    
-    if transitioning == True:
-        if current_time - last_transition >= transition_time:
-            transitioning = False
-        else:
-            screen.blit(townSquareTransition, (0,0))
-            last_transition = current_time
-        
-
         
     
-    pygame.display.update() 
-    clock.tick(30)
+    pygame.display.update()
+    print(clock.get_fps()) 
+    clock.tick(24)
   

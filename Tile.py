@@ -5,7 +5,6 @@ class Tile():
     def __init__(self, kind, pos) -> None:
         self.ss = SpriteSheet(pygame.image.load("dungeonQuester/tiles\indoor_tiles.png"))
         self.img = self.ss.get_static_image(16, 16, 96, 1, 112, 17, 10, (0,0,0))
-        self.rect = self.img.get_rect()
         self.pos = pos
 
         if kind == "Floor":
@@ -24,3 +23,22 @@ class Tile():
             self.img = self.ss.get_static_image(20, 27, 54, 100, 74, 127, 4, (0,0,0))
         elif kind == "AS":
             self.img = self.ss.get_static_image(16, 21, 48, 76, 64, 97, 4, (0,0,0))
+        elif kind == "BAR":
+            self.img = self.ss.get_static_image(80, 52, 0, 139, 80, 191, 5, (0,0,0))
+        elif kind == "CARPET":
+            self.img = self.ss.get_static_image(48, 28, 0, 3, 48, 31, 3, (0,0,0))
+        elif kind == "CHAIR_LEFT":
+            self.img = self.ss.get_static_image(11, 22, 50, 43, 61, 65, 4, (0,0,0))
+        elif kind == "CHAIR_RIGHT":
+            self.img = self.ss.get_static_image(11, 22, 35, 43, 46, 65, 4, (0,0,0))
+        elif kind == "TABLE":
+            self.img = self.ss.get_static_image(19, 21, 71, 44, 90, 65, 4, (0,0,0))
+        elif kind == "MUG":
+            self.ss = SpriteSheet(pygame.image.load("dungeonQuester/tiles/mug.png"))
+            self.img = self.ss.get_static_image(16, 16, 0, 0, 16, 16, 4, (0,0,0))
+            self.ss = SpriteSheet(pygame.image.load("dungeonQuester/tiles\indoor_tiles.png"))
+        elif kind == "CHAIR_DOWN":
+            self.img = self.ss.get_static_image(11, 22, 18, 43, 29, 65, 4, (0,0,0))
+        elif kind == "CHAIR_UP":
+            self.img = self.ss.get_static_image(11, 17, 3, 48, 14, 65, 4, (0,0,0))
+        self.rect = self.img.get_rect()
