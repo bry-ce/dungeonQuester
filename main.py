@@ -26,10 +26,10 @@ hit = False
 direction = "up"
 
 main_player = Player(1, 6)
-door = Door(2, (100,300))
-current_room = loadRoom("dungeonQuester/rooms/tavern.room.txt")
-current_room_decor = loadRoom("dungeonQuester/rooms/tavernDecor.txt")
-townSquareTransition = pygame.image.load("dungeonQuester/transitionScreens/townSquare.png")
+current_room = loadRoom("rooms/tavern.room.txt")
+current_room_doors = loadDoors("rooms/taverndecor.txt")
+current_room_decor = loadRoom("rooms/tavernDecor.txt")
+townSquareTransition = pygame.image.load("transitionScreens/townSquare.png")
 
 #gui = Gui()
 #start_screen_picker = gui.gui_sprite_sheet.get_static_image(310, 80, 0, 110, 310, 190, 1, BLACK)
@@ -77,17 +77,12 @@ while True:
             if event.button == 1:
                 main_player.attack()
 
-    if pygame.Rect.colliderect(main_player.subrect, door.rect):
-        transitioning = True
-        main_player.place((436, 336))
-        
-
+    for door in current_room_doors:
+        main_player.doorCollide(door)
 
     main_player.update()
 
     #draws player to screen based on direction, and handles animations
-    
-
     
     for tile in current_room:
         screen.blit(tile.img, tile.pos)
@@ -95,12 +90,14 @@ while True:
     for decor in current_room_decor:
         screen.blit(decor.img, decor.pos)
     
+    for door in current_room_doors:
+        screen.blit(door.img, door.rect)
     
     screen.blit(door.img, door.rect)
     screen.blit(main_player.image, main_player.rect)
         
     
     pygame.display.update()
-    print(clock.get_fps()) 
     clock.tick(24)
+
   

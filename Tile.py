@@ -3,7 +3,7 @@ from SpriteSheet import *
 
 class Tile():
     def __init__(self, kind, pos) -> None:
-        self.ss = SpriteSheet(pygame.image.load("dungeonQuester/tiles\indoor_tiles.png"))
+        self.ss = SpriteSheet(pygame.image.load("tiles/indoor_tiles.png"))
         self.img = self.ss.get_static_image(16, 16, 96, 1, 112, 17, 10, (0,0,0))
         self.pos = pos
 
@@ -34,9 +34,9 @@ class Tile():
         elif kind == "TABLE":
             self.img = self.ss.get_static_image(19, 21, 71, 44, 90, 65, 4, (0,0,0))
         elif kind == "MUG":
-            self.ss = SpriteSheet(pygame.image.load("dungeonQuester/tiles/mug.png"))
+            self.ss = SpriteSheet(pygame.image.load("tiles/mug.png"))
             self.img = self.ss.get_static_image(16, 16, 0, 0, 16, 16, 4, (0,0,0))
-            self.ss = SpriteSheet(pygame.image.load("dungeonQuester/tiles\indoor_tiles.png"))
+            self.ss = SpriteSheet(pygame.image.load("tiles/indoor_tiles.png"))
         elif kind == "CHAIR_DOWN":
             self.img = self.ss.get_static_image(11, 22, 18, 43, 29, 65, 4, (0,0,0))
         elif kind == "CHAIR_UP":

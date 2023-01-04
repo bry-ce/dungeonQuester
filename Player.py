@@ -128,8 +128,8 @@ class Player():
             self.character_feet_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/FEET_shoes_brown.png").convert_alpha())
             self.character_body_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/BODY_male.png").convert_alpha())
         elif self.clothing == 1:
-            self.character_body_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry\png\walkcycle\BODY_male_plate.png").convert_alpha())
-            self.character_attack_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/thrust/plate_armor_spear.png").convert_alpha())
+            self.character_body_sprite_sheet = SpriteSheet(pygame.image.load("lpc_entry/png/walkcycle/BODY_male_plate.png").convert_alpha())
+            self.character_attack_sprite_sheet = SpriteSheet(pygame.image.load("lpc_entry/png/thrust/plate_armor_spear.png").convert_alpha())
         elif self.clothing == 2:
             self.character_head_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry\png\walkcycle\HEAD_robe_hood.png").convert_alpha())
             self.character_belt_sprite_sheet = SpriteSheet(pygame.image.load("dungeonQuester\lpc_entry/png/walkcycle/BELT_rope.png").convert_alpha())

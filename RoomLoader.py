@@ -61,3 +61,27 @@ def loadRoom(room):
 
     
     lines = newLines
+
+def loadDoors(room):
+
+    f = open(room, 'r')
+    lines = f.readlines()
+    f.close
+
+    size = 48
+    doors = []
+
+    newLines = []
+    for line in lines:
+        newline = ""
+        for c in line:
+            if  c != "\n":
+                newline += c
+            newLines += [newline]
+
+    for y, line in enumerate(lines):
+        for x, c in enumerate(line):
+            if c == "s":
+                doors += [Door(2, [x*size, y*size])]
+    
+    return doors
