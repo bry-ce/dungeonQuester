@@ -79,6 +79,7 @@ while True:
 
     for door in current_room_doors:
         main_player.doorCollide(door)
+        
 
     main_player.update()
 
@@ -91,8 +92,8 @@ while True:
         screen.blit(decor.img, decor.pos)
     
     for door in current_room_doors:
-        screen.blit(door.img, door.rect)
-    
+        screen.blit(door.img, door.pos)
+
     screen.blit(door.img, door.rect)
     screen.blit(main_player.image, main_player.rect)
         

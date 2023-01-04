@@ -182,8 +182,10 @@ class Player():
     
     
     def doorCollide(self, door):
-        if self.rect.colliderect(door.rect):
+        if self.rect.colliderect(self.rect, door.rect):
             self.place((436, 336))
+            
+            
     
 
     def place(self, position = (436, 336)):
