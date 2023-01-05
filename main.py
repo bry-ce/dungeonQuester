@@ -26,6 +26,7 @@ hit = False
 direction = "up"
 
 main_player = Player(1, 6)
+roomnum = 0
 current_room = loadRoom("rooms/tavern.room.txt")
 current_room_doors = loadDoors("rooms/taverndecor.txt")
 current_room_decor = loadRoom("rooms/tavernDecor.txt")
@@ -77,9 +78,7 @@ while True:
             if event.button == 1:
                 main_player.attack()
 
-    for door in current_room_doors:
-        main_player.doorCollide(door)
-        
+   
 
     main_player.update()
 
@@ -93,11 +92,24 @@ while True:
     
     for door in current_room_doors:
         screen.blit(door.img, door.pos)
-
-    screen.blit(door.img, door.rect)
-    screen.blit(main_player.image, main_player.rect)
-        
     
+    for door in current_room_doors:
+        main_player.doorCollide(door)
+        if main_player.checkCollide(door):
+            roomnum += 1
+            if roomnum == 1:
+                current_room = loadRoom("rooms/debugRoom.txt")
+                current_room_decor = loadRoom("rooms/debugRoom.txt")
+                current_room_doors = loadRoom("rooms/debugRoom.txt")
+        else: pass
+
+    
+
+
+    screen.blit(main_player.image, main_player.rect)
+    
+    
+
     pygame.display.update()
     clock.tick(24)
 

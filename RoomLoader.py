@@ -83,5 +83,10 @@ def loadDoors(room):
         for x, c in enumerate(line):
             if c == "s":
                 doors += [Door(2, [x*size, y*size])]
-    
+            else: pass
+
     return doors
+
+def checkRoom(num):
+    if num == 1:
+        return loadRoom("rooms/debugRoom.txt")

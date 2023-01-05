@@ -14,5 +14,5 @@ class Door():
         else:
             self.img = self.ss.get_static_image(16, 16, 16, 81, 32, 97, 2, (0,0,0))
         
-        self.rect = self.img.get_rect(topleft = (436, 336))
+        self.rect = self.img.get_rect(topleft = self.pos)
         

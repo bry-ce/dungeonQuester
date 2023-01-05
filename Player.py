@@ -182,12 +182,20 @@ class Player():
     
     
     def doorCollide(self, door):
-        if self.rect.colliderect(self.rect, door.rect):
+        if pygame.Rect.colliderect(self.subrect, door.rect):
             self.place((436, 336))
-            
-            
-    
+            return True
 
+        return False
+
+    def checkCollide(self, object):
+        if pygame.Rect.colliderect(self.subrect, object.rect):
+            return True
+        else: return False
+
+
+
+        
     def place(self, position = (436, 336)):
         self.rect.topleft = position
 
