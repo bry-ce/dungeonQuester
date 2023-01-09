@@ -96,14 +96,20 @@ while True:
     for door in current_room_doors:
         main_player.doorCollide(door)
         if main_player.checkCollide(door):
-            roomnum += 1
+            roomnum += door.change
             if roomnum == 1:
-                current_room = loadRoom("rooms/debugRoom.txt")
-                current_room_decor = loadRoom("rooms/debugRoom.txt")
-                current_room_doors = loadRoom("rooms/debugRoom.txt")
+                current_room = loadOutdoor("rooms/townSquare.txt")
+                current_room_decor = loadOutdoor("rooms/townSquareDecor.txt")
+                current_room_doors = loadDoors("rooms/townSquareDecor.txt")
+            elif roomnum == 2:
+                pass
+            elif roomnum == 3:
+                pass
+            elif roomnum == 0:
+                current_room = loadRoom("rooms/tavern.room.txt")
+                current_room_doors = loadDoors("rooms/taverndecor.txt")
+                current_room_decor = loadRoom("rooms/tavernDecor.txt")
         else: pass
-
-    
 
 
     screen.blit(main_player.image, main_player.rect)

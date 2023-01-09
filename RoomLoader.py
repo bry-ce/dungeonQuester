@@ -2,7 +2,36 @@ import pygame, math
 from Tile import *
 from SpriteSheet import *
 from Door import *
+from outdoorTile import *
+def loadOutdoor(room):
+    f = open(room, 'r')
+    lines = f.readlines()
+    f.close
 
+    size = 48
+    tiles =[]
+
+    newLines = []
+    for line in lines:
+        newline = ""
+        for c in line:
+            if  c != "\n":
+                newline += c
+            newLines += [newline]
+
+
+    for y, line in enumerate(lines):
+        for x, c in enumerate(line):
+            if c == "_":
+                pass
+            elif c == "g":
+                tiles += [outdoorTile('grass', [x*size, y*size])]
+            elif c == 'f':
+                tiles += [outdoorTile('f', [x*size, y*size])]
+            elif c == 'p':
+                tiles += [outdoorTile('p', [x*size, y*size])]
+    return tiles
+        
 def loadRoom(room):
     f = open(room, 'r')
     lines = f.readlines()
@@ -39,8 +68,6 @@ def loadRoom(room):
                 tiles += [Tile("BS", [x*size, y*size])]
             elif c == "a":
                 tiles += [Tile("AS", [(x*size)+7, (y*size)+20])]
-            elif c == "s":
-                tiles += [Door(2, [x*size, y*size])]
             elif c == "p":
                 tiles += [Tile("BAR", [x*size, y*size])]
             elif c == "c":
@@ -59,11 +86,7 @@ def loadRoom(room):
                 tiles += [Tile("MUG", [x*size, y*size])]
     return tiles
 
-    
-    lines = newLines
-
 def loadDoors(room):
-
     f = open(room, 'r')
     lines = f.readlines()
     f.close
@@ -79,14 +102,12 @@ def loadDoors(room):
                 newline += c
             newLines += [newline]
 
+
     for y, line in enumerate(lines):
         for x, c in enumerate(line):
             if c == "s":
-                doors += [Door(2, [x*size, y*size])]
+                doors += [Door(1, [x*size, y*size], 1)]
+            if c == "x":
+                doors += [Door(1, [x*size, y*size], -1)]
             else: pass
-
     return doors
-
-def checkRoom(num):
-    if num == 1:
-        return loadRoom("rooms/debugRoom.txt")
