@@ -3,6 +3,29 @@ from Tile import *
 from SpriteSheet import *
 from Door import *
 from outdoorTile import *
+def loadFence(room):
+    f = open(room, 'r')
+    lines = f.readlines()
+    f.close
+
+    size = 48
+    tiles =[]
+
+    newLines = []
+    for line in lines:
+        newline = ""
+        for c in line:
+            if  c != "\n":
+                newline += c
+            newLines += [newline]
+
+
+    for y, line in enumerate(lines):
+        for x, c in enumerate(line):
+            if c == 's':
+                pass
+
+    
 def loadOutdoor(room):
     f = open(room, 'r')
     lines = f.readlines()
@@ -29,7 +52,21 @@ def loadOutdoor(room):
             elif c == 'f':
                 tiles += [outdoorTile('f', [x*size, y*size])]
             elif c == 'p':
-                tiles += [outdoorTile('p', [x*size, y*size])]
+                tiles += [outdoorTile('top_path', [x*size, y*size])]
+            elif c == 'b':
+                tiles += [outdoorTile('bottom_path', [x*size, y*size])]
+            elif c == 'l':
+                tiles += [outdoorTile('left_path', [x*size, y*size])]
+            elif c == 'r':
+                tiles += [outdoorTile('right_path', [x*size, y*size])]
+            elif c == '{':
+                tiles += [outdoorTile('bl_corner', [x*size, y*size])]
+            elif c == '}':
+                tiles += [outdoorTile('br_corner', [x*size, y*size])]
+            elif c == '[':
+                tiles += [outdoorTile('tl_corner', [x*size, y*size])]
+            elif c == ']':
+                tiles += [outdoorTile('tr_corner', [x*size, y*size])]
     return tiles
         
 def loadRoom(room):
