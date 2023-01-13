@@ -25,12 +25,14 @@ current_time = pygame.time.get_ticks()
 hit = False
 direction = "up"
 
+
+roomnum = 0
 main_player = Player(1, 6)
 #door = Door(2, (100,300))
-current_room = loadRoom("dungeonQuester/rooms/tavern.room.txt")
-current_room_doors = loadDoors("dungeonQuester/rooms/tavernDecor.txt")
-current_room_decor = loadRoom("dungeonQuester/rooms/tavernDecor.txt")
-townSquareTransition = pygame.image.load("dungeonQuester/transitionScreens/townSquare.png")
+current_room = loadRoom("rooms/tavern.room.txt")
+current_room_doors = loadDoors("rooms/tavernDecor.txt")
+current_room_decor = loadRoom("rooms/tavernDecor.txt")
+townSquareTransition = pygame.image.load("transitionScreens/townSquare.png")
 
 #gui = Gui()
 #start_screen_picker = gui.gui_sprite_sheet.get_static_image(310, 80, 0, 110, 310, 190, 1, BLACK)
@@ -94,8 +96,19 @@ while True:
     
     for door in current_room_doors:
         screen.blit(door.img, door.pos)
+       
+        if pygame.Rect.colliderect(main_player.subrect, door.rect):
+            roomnum += door.change
+            if roomnum == 0:
+                main_player.place()
+                current_room = loadRoom("rooms/tavern.room.txt")
+                current_room_doors = loadDoors("rooms/tavernDecor.txt")
+                current_room_decor = loadRoom("rooms/tavernDecor.txt")
+            elif roomnum == 1:
+                current_room = loadOutdoor("rooms/townSquare.txt")
+                current_room_decor = loadOutdoor("rooms/townSquareDecor.txt")
+                current_room_doors = loadDoors("rooms/townSquareDecor.txt")
 
-    
 
             
         

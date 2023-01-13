@@ -18,7 +18,18 @@ class Skill():
         }    
 
         self.lvl = 0
+        self.maxLvl = len(self.requirements)
         self.currentXp = 0
-        self.nextLvlXp = self.requirements
+        self.nextLvlXp = self.requirements.get(self.lvl) - self.currentXp
         
-        
+    def gainxp(self, amount):
+        self.currentXp += amount
+        if (self.currentXp >= self.requirements.get(self.lvl)):
+            self.lvlUp
+            self.currentXp -= self.requirements.get(self.lvl)
+        else : pass
+
+    def lvlUp(self):
+        if (self.lvl < self.maxLvl):
+            self.lvl += 1
+        else : pass
