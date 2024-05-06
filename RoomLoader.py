@@ -2,6 +2,7 @@ import pygame, math
 from Tile import *
 from SpriteSheet import *
 from Door import *
+<<<<<<< HEAD
 from outdoorTile import *
 def loadFence(room):
     f = open(room, 'r')
@@ -69,6 +70,9 @@ def loadOutdoor(room):
                 tiles += [outdoorTile('tr_corner', [x*size, y*size])]
     return tiles
         
+=======
+
+>>>>>>> 84c4757 (commit)
 def loadRoom(room):
     f = open(room, 'r')
     lines = f.readlines()
@@ -104,6 +108,7 @@ def loadRoom(room):
             elif c == "b":
                 tiles += [Tile("BS", [x*size, y*size])]
             elif c == "a":
+<<<<<<< HEAD
                 tiles += [Tile("AS", [(x*size)+7, (y*size)+20])]
             elif c == "p":
                 tiles += [Tile("BAR", [x*size, y*size])]
@@ -148,3 +153,10 @@ def loadDoors(room):
                 doors += [Door(1, [x*size, y*size], -1)]
             else: pass
     return doors
+=======
+                tiles += [Tile("AS", [x*size, (y*size)-5])]
+            
+    return tiles
+    
+    lines = newLines
+>>>>>>> 84c4757 (commit)

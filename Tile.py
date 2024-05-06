@@ -3,8 +3,14 @@ from SpriteSheet import *
 
 class Tile():
     def __init__(self, kind, pos) -> None:
+<<<<<<< HEAD
         self.ss = SpriteSheet(pygame.image.load("tiles/indoor_tiles.png"))
         self.img = self.ss.get_static_image(16, 16, 96, 1, 112, 17, 10, (0,0,0))
+=======
+        self.ss = SpriteSheet(pygame.image.load("tiles\indoor_tiles.png"))
+        self.img = self.ss.get_static_image(16, 16, 96, 1, 112, 17, 10, (0,0,0))
+        self.rect = self.img.get_rect()
+>>>>>>> 84c4757 (commit)
         self.pos = pos
 
         if kind == "Floor":
@@ -22,6 +28,7 @@ class Tile():
         elif kind == "BS":
             self.img = self.ss.get_static_image(20, 27, 54, 100, 74, 127, 4, (0,0,0))
         elif kind == "AS":
+<<<<<<< HEAD
             self.img = self.ss.get_static_image(16, 21, 48, 76, 64, 97, 4, (0,0,0))
         elif kind == "BAR":
             self.img = self.ss.get_static_image(80, 52, 0, 139, 80, 191, 5, (0,0,0))
@@ -42,3 +49,6 @@ class Tile():
         elif kind == "CHAIR_UP":
             self.img = self.ss.get_static_image(11, 17, 3, 48, 14, 65, 4, (0,0,0))
         self.rect = self.img.get_rect()
+=======
+            self.img = self.ss.get_static_image(16, 21, 48, 76, 64, 97, 4, (0,0,0))
+>>>>>>> 84c4757 (commit)
